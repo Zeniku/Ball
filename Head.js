@@ -54,18 +54,22 @@ class Head extends Ball {
       nseg.position.setPosv(lseg.position)
       seg.push(nseg)
     }
-    removeSegment(ent, id){
+    removeSegment(ent, index){
       let seg = ent.data.segments
-      for(let h of seg){
-        if(h.id = id){
-          if(entities[id] == h){
-            entities.splice(id, 1)
-            seg.splice(seg.indexOf(h), 1)
+      for(let j = 0; j < entities.length; j++){
+        if(entities[j] && seg[index]){
+        if(entities[j].id == seg[index].id){
+          entities.splice(j, 1)
+          seg.splice(index, 1)
           }
         }
       }
     }
     update(ent) {
+      if(ent.data.timer >= 60){
+        //this.removeSegment(ent, ent.data.segments.length - 1)
+        ent.data.timer = 0
+      }
       this.segmentMove(ent)
       super.update(ent)
       ent.data.timer++

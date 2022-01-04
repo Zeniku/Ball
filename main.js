@@ -23,9 +23,16 @@ window.onload = function() {
       segmentOffset: 10,
       bodyCount: 100,
     })
-    
+    types.he = new Head({
+      radius: 10,
+      segmentType: new Ball({
+        radius: 10
+      }),
+      segmentOffset: 10,
+      bodyCount: 100,
+    })
     for(let i in types){
-      types[i].create({}).setVel(10, 10)
+      types[i].create({}).setVel(50 * Math.random(), 50 * Math.random())
     }
     
   let ht = 0
