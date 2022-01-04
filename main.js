@@ -16,26 +16,27 @@ window.onload = function() {
   console.log('Hello World!');
     
     types.hh = new Head({
+      radius: 20,
+      segmentType: new Ball({
+        radius: 20
+      }),
+      segmentOffset: 15,
+      bodyCount: 1000,
+    })
+    /*types.he = new Head({
       radius: 10,
       segmentType: new Ball({
         radius: 10
       }),
       segmentOffset: 10,
       bodyCount: 100,
-    })
-    types.he = new Head({
-      radius: 10,
-      segmentType: new Ball({
-        radius: 10
-      }),
-      segmentOffset: 10,
-      bodyCount: 100,
-    })
+    })*/
     for(let i in types){
-      types[i].create({}).setVel(50 * Math.random(), 50 * Math.random())
+      types[i].create({})
     }
     
   let ht = 0
+  let hh = true
   update();
 
   function update() {
@@ -56,6 +57,13 @@ window.onload = function() {
 	    }else if (pos.y < 0) {
 	      pos.y = 0;
 	      vel.scl(1, -bounce);
+	    }
+	    if(e.type instanceof Head){
+	      e.velocity.setLength(30)
+	      if(hh){
+	        e.velocity.setAngle(Math.random() * 360)
+	        hh = false
+	      }
 	    }
   	  e.update()
   	  e.render(context)
