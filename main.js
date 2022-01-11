@@ -1,12 +1,3 @@
-function im(...script){
-  for(let i of script){
-    let string = String(i).trim();
-    if(i != undefined && string.endsWith(".js")){
-      document.write('<script type="text/javascript" src=' + string + '></script>');
-    }
-  }
-}
-im("Vec.js", "Ent.js", "Ball.js", "Head.js")
 window.onload = function() {
   let canvas = document.getElementById("canvas"),
 		context = canvas.getContext("2d"),
@@ -21,7 +12,7 @@ window.onload = function() {
         radius: 20
       }),
       segmentOffset: 15,
-      bodyCount: 1000,
+      bodyCount: 100,
     })
     /*types.he = new Head({
       radius: 10,
@@ -34,8 +25,6 @@ window.onload = function() {
     for(let i in types){
       types[i].create({})
     }
-    
-  let ht = 0
   let hh = true
   update();
 
@@ -67,15 +56,7 @@ window.onload = function() {
 	    }
   	  e.update()
   	  e.render(context)
-  	  if(ht >= 60){
-  	    //logs(e.id)
-  	  }
   	});
-  	if(ht >= 60){
-  	  logs('ha')
-  	  ht = 0
-  	}
-  	ht++//ht is a timer
   	requestAnimationFrame(update);
   }
 }

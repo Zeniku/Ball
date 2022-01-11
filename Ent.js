@@ -4,6 +4,7 @@ class Ent {
     this.type = config.type
     this.position = new Vec(config.x, config.y)
     this.velocity = new Vec(config.velX, config.velY)
+    this.removed = false
     this.init()
   }
   init() {
@@ -27,5 +28,15 @@ class Ent {
   setVel(x, y) {
     this.velocity.setPos(x, y)
     return this
+  }
+  remove(){
+    for(let j = 0; j < entities.length; j++){
+      if(entities[j] && this){
+        if(entities[j].id == this.id){
+          this.removed = true
+          entities.splice(j, 1)
+        }
+      }
+    }
   }
 }
