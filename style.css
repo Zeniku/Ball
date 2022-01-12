@@ -1,8 +1,13 @@
-
-body {
+head,body {
   font-size: 15pt;
-  background: #333#42445A;
-  padding: 0;
-  margin: 0;
+  background: #333;
+  padding: 0px;
+  margin: 0px;
   overflow: hidden;
+}
+canvas {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 }

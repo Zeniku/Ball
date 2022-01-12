@@ -5,7 +5,7 @@ class Ent {
     this.position = new Vec(config.x, config.y)
     this.velocity = new Vec(config.velX, config.velY)
     this.removed = false
-    this.init()
+    this.init();
   }
   init() {
     this.type.init(this)
@@ -24,6 +24,12 @@ class Ent {
   setPos(x, y) {
     this.position.setPos(x, y)
     return this
+  }
+  setPosv(v) {
+    return this.setPos(v.x, v.y)
+  }
+  setVelv(v) {
+    return this.setVel(v.x, v.y)
   }
   setVel(x, y) {
     this.velocity.setPos(x, y)

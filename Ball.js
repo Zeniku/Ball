@@ -16,10 +16,8 @@ class Ball {
     con.fill();
   }
   create(config) {
-    entities.push(new Ent(Object.assign({
-      type: this,
-    }, config)))
-    entities[entities.length - 1].id = entities.length - 1
-    return entities[entities.length - 1]
+    return createEnt(Object.assign({
+      type: this
+    }, config))
   }
 }

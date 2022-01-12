@@ -7,10 +7,11 @@ class Head extends Ball {
     this.color = "#D54949"
   }
   init(ent) {
+    ent.data = {
+      timer: 0,
+      segments: []
+    }
     super.init(ent)
-    ent.data.timer = 0
-    ent.data.segments = []
-    this.createSegments(ent)
   }
   createSegments(ent) {
     for (let i = 0; i < this.bodyCount; i++) {
@@ -37,15 +38,15 @@ class Head extends Ball {
       const nx = this.segmentOffset * Math.cos(angle);
       const ny = this.segmentOffset * Math.sin(angle);
       // add the new x and new y to the last snake's position to "join" the two together without a gap
-      curr.setPos(nx + last.x, ny + last.y);
+      curr.setPos(nx + last.x, ny + last.y)
     }
   }
   addSegment(ent, segmentType){
     let seg = ent.data.segments
     let lseg = seg[seg.length - 1] ? seg[seg.length - 1] : ent //check if last segment is defined
-    let nseg = segmentType.create({}) //create next segment
+    let nseg = segmentType.create({});
     nseg.color = ((Math.random() * 10) > 5)? "#D54949" : "#4990D5" //random color
-    nseg.position.setPosv(lseg.position) //set spawn position
+    nseg.setPosv(lseg.position)
     seg.push(nseg)
   }
   removeSegment(ent, index){
@@ -53,13 +54,13 @@ class Head extends Ball {
     if(seg) seg.remove();
   }
   update(ent) {
-    if(ent.data.timer >= 60){
-      //this.removeSegment(ent, 1)
+    /*if(ent.data.timer >= 60){
+      this.addSegment(ent, this.segmentType)
       ent.data.timer = 0
-    }
+    }*/
+    
     let segments = ent.data.segments,
     filtered = segments.filter(seg => seg != null && !seg.removed)
-    
     if(filtered.length != segments.length){
       ent.data.segments = filtered
       //check if segments are removed and remove it
@@ -70,10 +71,10 @@ class Head extends Ball {
     ent.data.timer++
   }
   create(config) {
-    entities.push(new Ent(Object.assign({
+    let ent = createEnt(Object.assign({
       type: this
-    }, config)))
-    entities[entities.length - 1].id = entities.length - 1
-    return entities[entities.length - 1]
+    }, config))
+    this.createSegments(ent)
+    return ent
   }
 }

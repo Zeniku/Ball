@@ -23,15 +23,26 @@ window.onload = function() {
       bodyCount: 100,
     })*/
     for(let i in types){
-      types[i].create({})
+      types[i].create({}).setPos(width/2, height/2)
     }
   let hh = true
+  function init(){
+    if(hh){
+      entities.forEach(e => {
+  	    if(e.type instanceof Head) {
+  	      e.velocity.setAngle(Math.random() * 360)
+  	      //logs(e.id)
+  	    }
+      });
+      hh = false
+    }
+  }
   update();
-
   function update() {
     context.clearRect(0, 0, width, height);
-  	entities.forEach(e => {
-  	  let pos = e.position,
+  	for(let i = 0; i < entities.length; i++){
+  	  let e = entities[i],
+  	    pos = e.position,
   	    vel = e.velocity
   	  if (pos.x > width) {
 	      pos.x = width;
@@ -48,15 +59,14 @@ window.onload = function() {
 	      vel.scl(1, -bounce);
 	    }
 	    if(e.type instanceof Head){
-	      e.velocity.setLength(30)
-	      if(hh){
-	        e.velocity.setAngle(Math.random() * 360)
-	        hh = false
-	      }
+	      e.velocity.setLength(10)
 	    }
   	  e.update()
-  	  e.render(context)
-  	});
+  	};
+  	for(let i = entities.length - 1; i >= 0; i--){
+  	  entities[i].render(context)
+  	}
+  	init();
   	requestAnimationFrame(update);
   }
 }
