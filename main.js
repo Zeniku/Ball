@@ -12,7 +12,7 @@ window.onload = function() {
         radius: 20
       }),
       segmentOffset: 15,
-      bodyCount: 100,
+      bodyCount: 200,
     })
     /*types.he = new Head({
       radius: 10,

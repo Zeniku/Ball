@@ -14,8 +14,10 @@ class Head extends Ball {
     super.init(ent)
   }
   createSegments(ent) {
+    let seg = ent.data.segments
     for (let i = 0; i < this.bodyCount; i++) {
-      this.addSegment(ent, this.segmentType)
+      let lseg = seg[i - 1]? seg[i - 1].position : ent.position
+      this.addSegment(ent.data.segments, this.segmentType, lseg)
     }
   }
   segmentMove(ent) {
@@ -41,13 +43,11 @@ class Head extends Ball {
       curr.setPos(nx + last.x, ny + last.y)
     }
   }
-  addSegment(ent, segmentType){
-    let seg = ent.data.segments
-    let lseg = seg[seg.length - 1] ? seg[seg.length - 1] : ent //check if last segment is defined
+  addSegment(segments, segmentType, position){
     let nseg = segmentType.create({});
-    nseg.color = ((Math.random() * 10) > 5)? "#D54949" : "#4990D5" //random color
-    nseg.setPosv(lseg.position)
-    seg.push(nseg)
+    nseg.color = (Math.random() * 10 > 5)? "#D54949" : "#4990D5" //random color
+    nseg.setPosv(position)
+    segments.push(nseg)
   }
   removeSegment(ent, index){
     let seg = ent.data.segments[index]

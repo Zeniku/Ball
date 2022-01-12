@@ -17,7 +17,7 @@ class Ent {
   }
   accel(x, y) {
     this.velocity.add(x, y)
-  }
+  }''
   render(con) {
     this.type.render(this, con);
   }
