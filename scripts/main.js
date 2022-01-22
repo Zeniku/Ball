@@ -20,7 +20,7 @@ window.onload = function() {
   function init(){
     if(hh){
       entities.forEach(e => {
-  	    if(e.type instanceof Head)e.velocity.setAngle(Math.random() * 360)
+  	    if(e.type instanceof Head) e.velocity.setAngle(Math.random() * 360)
       });
       hh = false
     }
@@ -54,7 +54,7 @@ window.onload = function() {
   	  //outline
   	  context.fillStyle = "#000000"
       context.beginPath()
-      context.arc(e.position.x, e.position.y, e.type.radius * 1.2, 0, Math.PI * 2);
+      context.arc(e.position.x, e.position.y, e.type.radius * 1.4, 0, Math.PI * 2);
       context.fill()
   	};
   	for(let i = entities.length - 1; i >= 0; i--){
