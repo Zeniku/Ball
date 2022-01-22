@@ -1,3 +1,6 @@
+/*
+ * @author Zeniku
+*/
 class Ent {
   constructor(config) {
     this.data = {} //for some not messy storage
@@ -17,7 +20,7 @@ class Ent {
   }
   accel(x, y) {
     this.velocity.add(x, y)
-  }''
+  }
   render(con) {
     this.type.render(this, con);
   }
@@ -45,4 +48,14 @@ class Ent {
       }
     }
   }
+  angleTo(p2) {
+	  let p2Pos = p2.position,
+	  pPos = this.position;
+		return Math.atan2(p2Pos.y - pPos.y, p2Pos.x - pPos.x);
+	}
+	distanceTo(p2){
+	  let p2Pos = p2.position,
+	    pPos = this.position;
+	  return distance(pPos.x, pPos.y, p2Pos.x, p2Pos.y);
+	}
 }

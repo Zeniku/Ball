@@ -6,7 +6,7 @@ window.onload = function() {
 		
   console.log('Hello World!');
     
-    types.hh = new Head({
+    let asdf = new Head({
       radius: 20,
       segmentType: new Ball({
         radius: 20
@@ -14,29 +14,18 @@ window.onload = function() {
       segmentOffset: 15,
       bodyCount: 200,
     })
-    /*types.he = new Head({
-      radius: 10,
-      segmentType: new Ball({
-        radius: 10
-      }),
-      segmentOffset: 10,
-      bodyCount: 100,
-    })*/
-    for(let i in types){
-      types[i].create({}).setPos(width/2, height/2)
-    }
+    asdf.create({}).setPos(width/2, height/2)
+    
   let hh = true
   function init(){
     if(hh){
       entities.forEach(e => {
-  	    if(e.type instanceof Head) {
-  	      e.velocity.setAngle(Math.random() * 360)
-  	      //logs(e.id)
-  	    }
+  	    if(e.type instanceof Head)e.velocity.setAngle(Math.random() * 360)
       });
       hh = false
     }
   }
+  
   update();
   function update() {
     context.clearRect(0, 0, width, height);
@@ -62,9 +51,14 @@ window.onload = function() {
 	      e.velocity.setLength(10)
 	    }
   	  e.update()
+  	  //outline
+  	  context.fillStyle = "#000000"
+      context.beginPath()
+      context.arc(e.position.x, e.position.y, e.type.radius * 1.2, 0, Math.PI * 2);
+      context.fill()
   	};
   	for(let i = entities.length - 1; i >= 0; i--){
-  	  entities[i].render(context)
+      entities[i].render(context)
   	}
   	init();
   	requestAnimationFrame(update);

@@ -9,12 +9,12 @@
       bounce = 0.987,
       types = {},
       distance = function(x1, y1, x2, y2){
-        let dx = x1 - x2
-          dy = y1 - y2
-        return Math.srqt(dx * dx + dy * dy)
+        let dx = x2 - x1
+          dy = y2 - y1
+        return Math.sqrt(dx * dx + dy * dy)
       },
       createEnt = function(config){
-        let ent = new Ent(Object.assign({}, config))
+        let ent = new Ent(config)
         entities.push(ent)
         ent.id = entities.length - 1
         return ent
@@ -31,6 +31,7 @@
       };
       return copy;
     }
+    
     function logs(){
       for(let i of arguments){
         console.log(i)
@@ -38,11 +39,11 @@
     };
 
 	</script>
-	<script type="text/javascript" src="Vec.js"></script>
-	<script type="text/javascript" src="Ent.js"></script>
-	<script type="text/javascript" src="Ball.js"></script>
-	<script type="text/javascript" src="Head.js"></script>
-	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="/scripts/Vec.js"></script>
+	<script type="text/javascript" src="/scripts/Ent.js"></script>
+	<script type="text/javascript" src="/scripts/Ball.js"></script>
+	<script type="text/javascript" src="/scripts/Head.js"></script>
+	<script type="text/javascript" src="/scripts/main.js"></script>
 </head>
 <body>
 <canvas id="canvas"></canvas>

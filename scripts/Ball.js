@@ -1,3 +1,6 @@
+/*
+ * @author Zeniku
+*/
 class Ball {
   constructor(config) {
     this.radius = config.radius || 5

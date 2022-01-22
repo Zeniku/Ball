@@ -1,3 +1,4 @@
+
 class Head extends Ball {
   constructor(config) {
     super(config)
@@ -26,24 +27,20 @@ class Head extends Ball {
     // loop through each position
     for (let i = 0; i < seg.length; i++) {
       // get last and current position
-      const last = seg[i - 1] ? seg[i - 1].position : ent.position
-      const curr = seg[i].position;
+      const last = seg[i - 1] ? seg[i - 1] : ent
+      const curr = seg[i];
 
       // get difference in x and y of each position
-      const dx = curr.x - last.x;
-      const dy = curr.y - last.y;
-
-      // calculate the angle between the two parts of the snake
-      let angle = Math.atan2(dy, dx);
-
+      let angle = last.angleTo(curr)
       // get the new x and new y using polar coordinates
       const nx = this.segmentOffset * Math.cos(angle);
       const ny = this.segmentOffset * Math.sin(angle);
       // add the new x and new y to the last snake's position to "join" the two together without a gap
-      curr.setPos(nx + last.x, ny + last.y)
+      curr.setPos(nx + last.position.x, ny + last.position.y)
     }
   }
   addSegment(segments, segmentType, position){
+    
     let nseg = segmentType.create({});
     nseg.color = (Math.random() * 10 > 5)? "#D54949" : "#4990D5" //random color
     nseg.setPosv(position)
