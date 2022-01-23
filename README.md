@@ -1,19 +1,16 @@
-# Ball
-Balls
+## Ball
+A snake ball bouncing around
 
-# Ideas?
-I think ill make a health system and other stuff but idk ho{}w to.
-Might need your help
-so pls do pull request
-
-# Why im doing this
-Idk i just started on me being confused in reading a lib and accidentally created this
-And Yeah
+See on https://zeniku.github.io/Ball
 
 <details>
-<summary>
+<summary><b>Other stuff</b></summary>
 
-## Stuff
-</summary>
-i didn't use libraries i hope you are not to confused
+I didn't use libraries 
+I hope you are not too confused
+
+My repositories
+- **HeavyMachineryWiki:** https://github.com/Zeniku/HeavyMachinery-Wiki
+- **HeavyMachinery:** https://github.com/Zeniku/HeavyMachinery
+- **HeavyMachineryJava:** https://github.com/Zeniku/HeavyMachineryJava
 </details>
