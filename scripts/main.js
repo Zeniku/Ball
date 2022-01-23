@@ -25,7 +25,7 @@ window.onload = function() {
       hh = false
     }
   }
-  
+  let hhh = true
   update();
   function update() {
     context.clearRect(0, 0, width, height);
