@@ -8,6 +8,7 @@ class Ent {
     this.position = new Vec(config.x, config.y)
     this.velocity = new Vec(config.velX, config.velY)
     this.removed = false
+    this.color = config.color || config.type.color
     this.init();
   }
   init() {
@@ -17,6 +18,9 @@ class Ent {
     this.velocity.scl(0.997, 0.997) //friction i guess
     this.position.addv(this.velocity)
     this.type.update(this)
+  }
+  rotation(){
+    return Math.atan2(this.y, this.x);
   }
   accel(x, y) {
     this.velocity.add(x, y)
@@ -39,14 +43,14 @@ class Ent {
     return this
   }
   remove(){
-    for(let j = 0; j < entities.length; j++){
-      if(entities[j] && this){
-        if(entities[j].id == this.id){
+    entities.forEach((e, i)=> {
+      if(e && this){
+        if(e.id == this.id){
           this.removed = true
-          entities.splice(j, 1)
+          entities.splice(i, 1)
         }
       }
-    }
+    });
   }
   angleTo(p2) {
 	  let p2Pos = p2.position,

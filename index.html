@@ -7,7 +7,12 @@
 	  //global vars i guess
     let entities = [],
       bounce = 0.987,
-      types = {},
+      Time = {
+        time: 0,
+        deltaTime: 0,
+        fps: 1000 / 60,
+        lastTimestamp: 0
+      },
       distance = function(x1, y1, x2, y2){
         let dx = x2 - x1
           dy = y2 - y1
@@ -18,7 +23,18 @@
         entities.push(ent)
         ent.id = entities.length - 1
         return ent
-      }
+      },
+      clamp = function(min, max, v){
+        if(min > v){
+          return min
+        }else if (v > max){
+          return max
+        }else {
+          return v
+        }
+      },
+      radTodeg = Math.PI / 180,
+      degTorad = 180 / Math.PI
       
       
     const clone = obj => {
@@ -39,11 +55,11 @@
     };
 
 	</script>
-	<script type="text/javascript" src="/scripts/Vec.js"></script>
-	<script type="text/javascript" src="/scripts/Ent.js"></script>
-	<script type="text/javascript" src="/scripts/Ball.js"></script>
-	<script type="text/javascript" src="/scripts/Head.js"></script>
-	<script type="text/javascript" src="/scripts/main.js"></script>
+	<script type="text/javascript" src="./scripts/Vec.js"></script>
+	<script type="text/javascript" src="./scripts/Ent.js"></script>
+	<script type="text/javascript" src="./scripts/Ball.js"></script>
+	<script type="text/javascript" src="./scripts/Head.js"></script>
+	<script type="text/javascript" src="./scripts/main.js"></script>
 </head>
 <body>
 <canvas id="canvas"></canvas>

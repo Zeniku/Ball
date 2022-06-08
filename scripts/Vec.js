@@ -76,4 +76,18 @@ class Vec {
 	getLength() {
 		return Math.sqrt(this.x * this.x + this.y * this.y);
 	}
+	rotateRadExact(radians){
+	  let cos = Math.cos(radians);
+    let sin = Math.sin(radians);
+
+    let newX = this.x * cos - this.y * sin;
+    let newY = this.x * sin + this.y * cos;
+    
+    this.x = newX
+    this.y = newY
+	}
+	trns(deg, amount){
+	  this.setPos(amount, 0).setAngle(deg * degTorad)
+	  return this
+	}
 }

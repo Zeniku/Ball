@@ -1,10 +1,8 @@
 window.onload = function() {
   let canvas = document.getElementById("canvas"),
-		context = canvas.getContext("2d"),
+		ctx = canvas.getContext("2d"),
 		width = canvas.width = window.innerWidth,
 		height = canvas.height = window.innerHeight;
-		
-  console.log('Hello World!');
     
     let asdf = new Head({
       radius: 20,
@@ -12,26 +10,27 @@ window.onload = function() {
         radius: 20
       }),
       segmentOffset: 15,
-      bodyCount: 200,
-    })
-    asdf.create({}).setPos(width/2, height/2)
+      bodyCount: 100
+    });
     
-  let hh = true
-  function init(){
-    if(hh){
-      entities.forEach(e => {
-  	    if(e.type instanceof Head) e.velocity.setAngle(Math.random() * 360)
-      });
-      hh = false
-    }
-  }
-  let hhh = true
-  update();
-  function update() {
-    context.clearRect(0, 0, width, height);
-  	for(let i = 0; i < entities.length; i++){
-  	  let e = entities[i],
-  	    pos = e.position,
+    asdf.create({
+      x: width/2,
+      y: height/2
+    })
+    asdf.create({
+      x: width/2,
+      y: height/2
+    })
+    
+  requestAnimationFrame(update);
+  function update(time) {
+    Time.time = time;
+    Time.deltatime = (time - Time.lastTimestamp) / Time.fps
+    Time.lastTimestamp = time
+    
+    ctx.clearRect(0, 0, width, height);
+    entities.forEach((e) => {  
+  	  let pos = e.position,
   	    vel = e.velocity
   	  if (pos.x > width) {
 	      pos.x = width;
@@ -52,15 +51,14 @@ window.onload = function() {
 	    }
   	  e.update()
   	  //outline
-  	  context.fillStyle = "#000000"
-      context.beginPath()
-      context.arc(e.position.x, e.position.y, e.type.radius * 1.4, 0, Math.PI * 2);
-      context.fill()
-  	};
+  	  ctx.fillStyle = "#000000"
+      ctx.beginPath()
+      ctx.arc(pos.x, pos.y, e.type.radius * 1.4, 0, Math.PI * 2);
+      ctx.fill()
+  	});
   	for(let i = entities.length - 1; i >= 0; i--){
-      entities[i].render(context)
+      entities[i].render(ctx)
   	}
-  	init();
   	requestAnimationFrame(update);
   }
 }

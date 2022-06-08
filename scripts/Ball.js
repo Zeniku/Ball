@@ -7,7 +7,6 @@ class Ball {
     this.color = "#4990D5"
   }
   init(ent) {
-    ent.color = this.color
   }
   update(ent) {
     //empty
