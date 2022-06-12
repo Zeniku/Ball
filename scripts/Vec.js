@@ -85,9 +85,13 @@ class Vec {
     
     this.x = newX
     this.y = newY
+    return this
 	}
-	trns(deg, amount){
-	  this.setPos(amount, 0).setAngle(deg * degTorad)
+	rotate(degree){
+	  return this.rotateRadExact(degree * degTorad)
+	}
+	trns(amount, degree){
+	  this.setPos(amount, 0).setAngle(degree * degTorad)
 	  return this
 	}
 }

@@ -7,6 +7,7 @@ class Ball {
     this.color = "#4990D5"
   }
   init(ent) {
+    //empty
   }
   update(ent) {
     //empty
@@ -18,8 +19,9 @@ class Ball {
     con.fill();
   }
   create(config) {
-    return createEnt(Object.assign({
+    let ent = new Ent(Object.assign({
       type: this
     }, config))
+    return ent
   }
 }

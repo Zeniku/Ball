@@ -5,11 +5,13 @@ class Head extends Ball {
     this.bodyCount = config.bodyCount
     this.segmentOffset = config.segmentOffset
     this.segmentType = config.segmentType
-    this.color = "#D54949"
+    this.color = config.color || "#D54949"
   }
   init(ent) {
     ent.data = {
-      segments: []
+      segments: [],
+      vec: new Vec(),
+      //timer: new Timer(30),
     }
     let vel = ent.velocity
     vel.setLength(10)
@@ -20,7 +22,10 @@ class Head extends Ball {
     let seg = ent.data.segments
     for (let i = 0; i < this.bodyCount; i++) {
       let lseg = seg[i - 1]? seg[i - 1] : ent
-      this.addSegment(seg, this.segmentType, lseg.position)
+      let Tmp = ent.data.vec // dont want to create new vec each time
+      let angle = ent.velocity.getAngle() * radTodeg
+      Tmp.trns(this.segmentOffset, angle + 180).addv(lseg.position)
+      this.addSegment(seg, this.segmentType, Tmp)
     }
   }
   segmentMove(ent) {
@@ -55,16 +60,18 @@ class Head extends Ball {
   update(ent) {
     let segments = ent.data.segments,
     filtered = segments.filter(seg => seg != null && !seg.removed)
+    /*ent.data.timer.func = () => {
+      this.removeSegment(ent, 2)
+    }*/
     if(filtered.length != segments.length){
       ent.data.segments = filtered
       //check if segments are removed and remove it
     }
-    
     this.segmentMove(ent)
     super.update(ent)
   }
   create(config) {
-    let ent = createEnt(Object.assign({
+    let ent = new Ent(Object.assign({
       type: this
     }, config))
     this.createSegments(ent)

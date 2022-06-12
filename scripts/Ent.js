@@ -10,6 +10,8 @@ class Ent {
     this.removed = false
     this.color = config.color || config.type.color
     this.init();
+    entities.push(this)
+    this.id = entities.length - 1
   }
   init() {
     this.type.init(this)
@@ -43,14 +45,7 @@ class Ent {
     return this
   }
   remove(){
-    entities.forEach((e, i)=> {
-      if(e && this){
-        if(e.id == this.id){
-          this.removed = true
-          entities.splice(i, 1)
-        }
-      }
-    });
+    this.removed = true
   }
   angleTo(p2) {
 	  let p2Pos = p2.position,
