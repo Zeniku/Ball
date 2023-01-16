@@ -1,10 +1,13 @@
 /*
  * @author Zeniku
-*/
+ */
 class Ball {
-  constructor(config) {
-    this.radius = config.radius || 5
-    this.color = "#4990D5"
+  constructor({
+    radius = 20,
+    color = "#4990D5"
+  } = {}) {
+    this.radius = radius
+    this.color = color
   }
   init(ent) {
     //empty
@@ -14,9 +17,7 @@ class Ball {
   }
   render(ent, con) {
     con.fillStyle = ent.color
-    con.beginPath();
-    con.arc(ent.position.x, ent.position.y, this.radius, 0, Math.PI * 2);
-    con.fill();
+    Draw.circle(ent.position.x, ent.position.y, this.radius, con)
   }
   create(config) {
     let ent = new Ent(Object.assign({

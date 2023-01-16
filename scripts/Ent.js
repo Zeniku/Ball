@@ -1,15 +1,16 @@
 /*
  * @author Zeniku
-*/
+ */
 class Ent {
   constructor(config) {
-    this.data = {} //for some not messy storage
+    this.data = {} 
     this.type = config.type
     this.position = new Vec(config.x, config.y)
     this.velocity = new Vec(config.velX, config.velY)
     this.removed = false
     this.color = config.color || config.type.color
     this.init();
+    
     entities.push(this)
     this.id = entities.length - 1
   }
@@ -21,7 +22,7 @@ class Ent {
     this.position.addv(this.velocity)
     this.type.update(this)
   }
-  rotation(){
+  rotation() {
     return Math.atan2(this.y, this.x);
   }
   accel(x, y) {
@@ -44,17 +45,17 @@ class Ent {
     this.velocity.setPos(x, y)
     return this
   }
-  remove(){
+  remove() {
     this.removed = true
   }
   angleTo(p2) {
-	  let p2Pos = p2.position,
-	  pPos = this.position;
-		return Math.atan2(p2Pos.y - pPos.y, p2Pos.x - pPos.x);
-	}
-	distanceTo(p2){
-	  let p2Pos = p2.position,
-	    pPos = this.position;
-	  return distance(pPos.x, pPos.y, p2Pos.x, p2Pos.y);
-	}
+    let p2Pos = p2.position,
+      pPos = this.position;
+    return Math.atan2(p2Pos.y - pPos.y, p2Pos.x - pPos.x);
+  }
+  distanceTo(p2) {
+    let p2Pos = p2.position,
+      pPos = this.position;
+    return distance(pPos.x, pPos.y, p2Pos.x, p2Pos.y);
+  }
 }

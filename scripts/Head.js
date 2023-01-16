@@ -1,28 +1,31 @@
-
 class Head extends Ball {
-  constructor(config) {
-    super(config)
-    this.bodyCount = config.bodyCount
-    this.segmentOffset = config.segmentOffset
-    this.segmentType = config.segmentType
-    this.color = config.color || "#D54949"
+  constructor({
+    bodyCount = 50,
+    segmentOffset = 15,
+    segmentType = new Ball(),
+    color = "#D54949"
+  } = {}) {
+    super(...arguments)
+    this.bodyCount = bodyCount
+    this.segmentOffset = segmentOffset
+    this.segmentType = segmentType
+    this.color = color
   }
   init(ent) {
     ent.data = {
       segments: [],
-      vec: new Vec(),
       //timer: new Timer(30),
     }
     let vel = ent.velocity
     vel.setLength(10)
-  	vel.setAngle((Math.random() * 360) * degTorad)
+    vel.setAngle((Math.random() * 360) * degTorad)
     super.init(ent)
   }
   createSegments(ent) {
     let seg = ent.data.segments
+    let Tmp = new Vec() //temporary vec
     for (let i = 0; i < this.bodyCount; i++) {
-      let lseg = seg[i - 1]? seg[i - 1] : ent
-      let Tmp = ent.data.vec // dont want to create new vec each time
+      let lseg = seg[i - 1] ? seg[i - 1] : ent
       let angle = ent.velocity.getAngle() * radTodeg
       Tmp.trns(this.segmentOffset, angle + 180).addv(lseg.position)
       this.addSegment(seg, this.segmentType, Tmp)
@@ -36,7 +39,7 @@ class Head extends Ball {
       // get last and current position
       const last = seg[i - 1] ? seg[i - 1] : ent
       const curr = seg[i]
-      
+
       // get difference in x and y of each position
       let angle = last.angleTo(curr);
       // get the new x and new y using polar coordinate
@@ -46,27 +49,26 @@ class Head extends Ball {
       curr.setPos(nx + last.position.x, ny + last.position.y)
     }
   }
-  addSegment(segments, segmentType, lseg){
+  addSegment(segments, segmentType, lseg) {
     let nseg = segmentType.create({
-      color: (Math.random() * 10 > 5)? "#D54949" : "#4990D5" //random color
+      color: (Math.random() * 10 > 5) ? "#D54949" : "#4990D5" //random color
     });
     nseg.setPosv(lseg)
     segments.push(nseg)
   }
-  removeSegment(ent, index){
+  removeSegment(ent, index) {
     let seg = ent.data.segments[index]
-    if(seg) seg.remove();
+    if (seg) seg.remove();
   }
   update(ent) {
     let segments = ent.data.segments,
-    filtered = segments.filter(seg => seg != null && !seg.removed)
+      filtered = segments.filter(seg => seg != null && !seg.removed)
+    //check if segments are removed and remove it
+    if (filtered.length != segments.length) ent.data.segments = filtered
+    
     /*ent.data.timer.func = () => {
       this.removeSegment(ent, 2)
     }*/
-    if(filtered.length != segments.length){
-      ent.data.segments = filtered
-      //check if segments are removed and remove it
-    }
     this.segmentMove(ent)
     super.update(ent)
   }
